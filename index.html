@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>荣景文川音乐｜AI驱动的东方音乐厂牌</title>
+<meta name="description" content="荣景文川音乐厂牌，融合AI技术与东方审美，为Z世代打造高质量情绪音乐内容与文化资产。">
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #a6192e;
+    --dark: #1c1c1c;
+    --light: #f7f6f3;
+    --gold: #d4a574;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Noto Serif SC", serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.8;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 6%;
+    background: rgba(247,246,243,0.95);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.7rem;
+    letter-spacing: 0.35em;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+nav a {
+    margin-left: 2rem;
+    font-size: 0.95rem;
+    color: var(--dark);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--primary);
+}
+
+/* Hero */
+.hero {
+    min-height: 100vh;
+    padding: 10rem 10% 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    line-height: 1.3;
+    color: var(--primary);
+    margin-bottom: 2rem;
+}
+
+.hero p {
+    max-width: 820px;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 3rem;
+}
+
+.hero .cta {
+    display: inline-flex;
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn.outline {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Section */
+section {
+    padding: 8rem 10%;
+}
+
+h2 {
+    font-size: 2.6rem;
+    margin-bottom: 3.5rem;
+    text-align: center;
+    color: var(--primary);
+}
+
+/* Works */
+.album-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.album {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.album h3 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.album p {
+    color: #555;
+}
+
+.album span {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+/* About */
+.about {
+    background: #f0ede5;
+}
+
+.about p {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    font-size: 1.15rem;
+    text-align: center;
+}
+
+/* Token */
+.token {
+    background: var(--dark);
+    color: #eaeaea;
+    text-align: center;
+}
+
+.token h2 {
+    color: var(--gold);
+}
+
+.token p {
+    max-width: 820px;
+    margin: 0 auto 2rem;
+}
+
+.token a {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border-radius: 40px;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 4rem;
+    background: #111;
+    color: #777;
+    font-size: 0.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">荣景文川</div>
+    <nav>
+        <a href="#works">作品</a>
+        <a href="#about">厂牌理念</a>
+        <a href="#token">生态体系</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>让音乐，成为情绪的基础设施</h1>
+    <p>
+        荣景文川是一家以东方审美为核心的音乐厂牌，  
+        通过 AI 技术与人类创作的协同，  
+        构建面向 Z 世代的情绪内容系统。
+    </p>
+
+    <div class="cta">
+        <button class="btn primary">查看作品</button>
+        <button class="btn outline">了解厂牌</button>
+    </div>
+</section>
+
+<section id="works">
+    <h2>音乐作品</h2>
+
+    <div class="album-list">
+        <div class="album">
+            <h3>《理性燎原》</h3>
+            <p>在秩序与失序之间，寻找情绪的临界点。</p>
+            <span>▶ 播放</span>
+        </div>
+
+        <div class="album">
+            <h3>《晴冬》</h3>
+            <p>冷静、克制，却暗含温度。</p>
+            <span>▶ 播放</span>
+        </div>
+
+        <div class="album">
+            <h3>《一念轻安》</h3>
+            <p>当情绪归位，世界重新展开。</p>
+            <span>▶ 播放</span>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h2>我们如何工作</h2>
+    <p>
+        荣景文川结合 AI 音乐生成、人工审美修正与文化语境设计，  
+        建立一套可规模化却不失灵魂的内容生产体系。
+    </p>
+    <p>
+        我们不追逐流量，而是构建长期可复利的情绪资产。
+    </p>
+</section>
+
+<section id="token" class="token">
+    <h2>Crestwave Coin</h2>
+    <p>
+        厂牌部分收益将持续回流至 Crestwave 生态，  
+        让内容价值、社群共识与长期增长形成闭环。
+    </p>
+    <a href="https://crestwave.com" target="_blank">进入生态系统</a>
+</section>
+
+<footer>
+    © 2025 荣景文川音乐厂牌 · All Rights Reserved
+</footer>
+
+</body>
+</html>
