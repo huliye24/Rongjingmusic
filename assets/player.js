@@ -29,7 +29,7 @@
     recent: readArray(STORAGE.recent),
     isPlaying: false,
     shuffle: localStorage.getItem(STORAGE.shuffle) === "true",
-    repeat: localStorage.getItem(STORAGE.repeat) || "off",
+    repeat: ["off", "all", "one"].includes(localStorage.getItem(STORAGE.repeat)) ? localStorage.getItem(STORAGE.repeat) : "off",
     volume: readVolume(),
     databaseAvailable: true
   };
@@ -640,6 +640,7 @@
       imported += 1;
     }
 
+    state.queue = allTracks();
     state.filter = "local";
     state.view = "library";
     $$(".nav-item[data-view]").forEach((button) => button.classList.toggle("is-active", button.dataset.view === "library"));
