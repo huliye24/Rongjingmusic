@@ -67,6 +67,7 @@
 
   let toastHandle = 0;
   let dbPromise = null;
+  let lastMediaSessionTrackId = null;
 
   function readArray(key) {
     try {
@@ -278,7 +279,7 @@
 
   function updateCounts() {
     const count = allTracks().length;
-    el.trackCount.textContent = count + (count === 1 ? " 首作品" : " 首作品");
+    el.trackCount.textContent = count + " 首作品";
     el.queueCount.textContent = String((state.queue.length || allTracks().length)).padStart(2, "0");
     $("#view-all").hidden = state.view !== "discover";
   }
@@ -316,7 +317,7 @@
 
     tracks.forEach((track, index) => {
       const row = document.createElement("div");
-      row.className = "track-row" + (track.id === state.currentTrackId ? " is-current" : "");
+      row.className = "track-row" + (track.id === state.currentTrackId ? " is-current" : "") + (track.isLocal ? " is-local" : "");
       row.dataset.trackId = track.id;
 
       const indexCell = document.createElement("div");
@@ -358,6 +359,11 @@
       like.dataset.trackId = track.id;
 
       row.append(indexCell, main, tag, duration, like);
+      if (track.isLocal) {
+        const remove = createIconButton("delete", "从本地曲库移除", "×", "track-delete");
+        remove.dataset.trackId = track.id;
+        row.append(remove);
+      }
       el.trackList.append(row);
     });
   }
@@ -438,6 +444,16 @@
     const index = queue.findIndex((item) => item.id === track.id);
     el.heroTrackIndex.textContent = String(Math.max(0, index) + 1).padStart(2, "0") + " / " + String(queue.length).padStart(2, "0");
 
+    updateMediaSession(track);
+  }
+
+  function updateMediaSession(track) {
+    if (!track) {
+      lastMediaSessionTrackId = null;
+      return;
+    }
+    if (lastMediaSessionTrackId === track.id) return;
+    lastMediaSessionTrackId = track.id;
     if ("mediaSession" in navigator && "MediaMetadata" in window) {
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -445,10 +461,14 @@
           artist: track.artist || "荣景音乐",
           album: track.album || "荣景音乐"
         });
-        navigator.mediaSession.setActionHandler("play", () => togglePlayback());
-        navigator.mediaSession.setActionHandler("pause", () => togglePlayback());
-        navigator.mediaSession.setActionHandler("previoustrack", () => playPrevious());
-        navigator.mediaSession.setActionHandler("nexttrack", () => playNext());
+        navigator.mediaSession.setActionHandler("play", () => {
+          if (el.audio.paused) void togglePlayback();
+        });
+        navigator.mediaSession.setActionHandler("pause", () => {
+          if (!el.audio.paused) el.audio.pause();
+        });
+        navigator.mediaSession.setActionHandler("previoustrack", () => void playPrevious());
+        navigator.mediaSession.setActionHandler("nexttrack", () => void playNext());
       } catch (_) {
         // Media Session is an enhancement; playback must work without it.
       }
@@ -804,7 +824,7 @@
     document.addEventListener("keydown", (event) => {
       const target = event.target;
       const typing = target instanceof HTMLElement && (
-        target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)
+        target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT", "BUTTON", "A"].includes(target.tagName)
       );
       if (typing) {
         if (event.key === "Escape" && target === el.search) {
