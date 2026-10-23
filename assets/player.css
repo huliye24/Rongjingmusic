@@ -299,9 +299,9 @@ a { color: inherit; }
 .track-row.is-local { grid-template-columns: 32px minmax(0,1fr) minmax(70px,.5fr) 48px 31px 31px; }
 .track-row.is-current .track-title { color: var(--accent); }
 .track-index { position: relative; color: #a69b8f; font-size: 10px; font-variant-numeric: tabular-nums; text-align: center; }
-.row-play { display: none; width: 26px; height: 26px; border: 0; border-radius: 50%; background: var(--accent); color: white; font-size: 10px; cursor: pointer; }
-.track-row:hover .track-index, .track-row.is-current .track-index { color: transparent; }
-.track-row:hover .row-play, .track-row.is-current .row-play { position: absolute; top: 50%; left: 50%; display: inline-grid; place-items: center; transform: translate(-50%, -50%); }
+.row-play { position: absolute; top: 50%; left: 50%; display: inline-grid; place-items: center; width: 26px; height: 26px; border: 0; border-radius: 50%; background: var(--accent); color: white; font-size: 10px; cursor: pointer; opacity: 0; transform: translate(-50%, -50%); transition: opacity .15s ease; }
+.track-row:hover .track-index, .track-row.is-current .track-index, .track-row:focus-within .track-index { color: transparent; }
+.track-row:hover .row-play, .track-row.is-current .row-play, .track-row:focus-within .row-play { opacity: 1; }
 .track-main { min-width: 0; display: grid; gap: 4px; }
 .track-title { overflow: hidden; color: #332d27; font-size: 12px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
 .track-subtitle { overflow: hidden; color: #9a8f82; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
