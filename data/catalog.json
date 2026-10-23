@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "name": "Rongjing Music",
+  "description": "荣景音乐公开曲库。音源地址可在此文件中维护，无需修改播放器逻辑。",
+  "tracks": [
+    {
+      "id": "cadeau10-je-ne-veux-pas-enfermer-ton-aujourdhui",
+      "title": "Je ne veux pas enfermer ton aujourd'hui",
+      "artist": "Cadeau10",
+      "album": "Cadeau10 · Album 1",
+      "tag": "专辑 1",
+      "durationSeconds": 164,
+      "src": "https://play.rongjingmusic.com/audio/cadeau10-album1/je-ne-veux-pas-enfermer-ton-aujourdhui.wav",
+      "color": "#9b493e"
+    },
+    {
+      "id": "cadeau10-ne-vivons-pas-seulement-de-souvenirs",
+      "title": "Ne vivons pas seulement de souvenirs",
+      "artist": "Cadeau10",
+      "album": "Cadeau10 · Album 1",
+      "tag": "专辑 1",
+      "durationSeconds": 219,
+      "src": "https://play.rongjingmusic.com/audio/cadeau10-album1/ne-vivons-pas-seulement-de-souvenirs.wav",
+      "color": "#ad8454"
+    },
+    {
+      "id": "cadeau10-nous-pouvons-nous-reconnaitre-encore",
+      "title": "Nous pouvons nous reconnaître encore",
+      "artist": "Cadeau10",
+      "album": "Cadeau10 · Album 1",
+      "tag": "专辑 1",
+      "durationSeconds": 179,
+      "src": "https://play.rongjingmusic.com/audio/cadeau10-album1/nous-pouvons-nous-reconnaitre-encore.wav",
+      "color": "#65786b"
+    },
+    {
+      "id": "cadeau10-ou-es-tu-maintenant",
+      "title": "Où es-tu maintenant",
+      "artist": "Cadeau10",
+      "album": "Cadeau10 · Album 1",
+      "tag": "专辑 1",
+      "durationSeconds": 184,
+      "src": "https://play.rongjingmusic.com/audio/cadeau10-album1/ou-es-tu-maintenant.wav",
+      "color": "#65748b"
+    },
+    {
+      "id": "cadeau10-vieillir-et-devenir-nouveau-avec-toi",
+      "title": "Vieillir et devenir nouveau avec toi",
+      "artist": "Cadeau10",
+      "album": "Cadeau10 · Album 1",
+      "tag": "专辑 1",
+      "durationSeconds": 182,
+      "src": "https://play.rongjingmusic.com/audio/cadeau10-album1/vieillir-et-devenir-nouveau-avec-toi.wav",
+      "color": "#82677e"
+    }
+  ]
+}
