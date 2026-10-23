@@ -28,8 +28,8 @@
     favorites: readArray(STORAGE.favorites),
     recent: readArray(STORAGE.recent),
     isPlaying: false,
-    shuffle: localStorage.getItem(STORAGE.shuffle) === "true",
-    repeat: ["off", "all", "one"].includes(localStorage.getItem(STORAGE.repeat)) ? localStorage.getItem(STORAGE.repeat) : "off",
+    shuffle: readStored(STORAGE.shuffle) === "true",
+    repeat: ["off", "all", "one"].includes(readStored(STORAGE.repeat)) ? readStored(STORAGE.repeat) : "off",
     volume: readVolume(),
     databaseAvailable: true
   };
@@ -69,9 +69,25 @@
   let dbPromise = null;
   let lastMediaSessionTrackId = null;
 
+  function readStored(key) {
+    try {
+      return window["localStorage"].getItem(key);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeStored(key, value) {
+    try {
+      window["localStorage"].setItem(key, String(value));
+    } catch (_) {
+      // The player remains usable when browser storage is unavailable.
+    }
+  }
+
   function readArray(key) {
     try {
-      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      const value = JSON.parse(readStored(key) || "[]");
       return Array.isArray(value) ? value : [];
     } catch (_) {
       return [];
@@ -79,7 +95,7 @@
   }
 
   function readVolume() {
-    const value = Number(localStorage.getItem(STORAGE.volume));
+    const value = Number(readStored(STORAGE.volume));
     return Number.isFinite(value) && value >= 0 && value <= 1 ? value : 0.8;
   }
 
@@ -477,7 +493,7 @@
 
   function recordRecent(trackId) {
     state.recent = [trackId].concat(state.recent.filter((id) => id !== trackId)).slice(0, 30);
-    localStorage.setItem(STORAGE.recent, JSON.stringify(state.recent));
+    writeStored(STORAGE.recent, JSON.stringify(state.recent));
   }
 
   function toggleFavorite(trackId) {
@@ -489,7 +505,7 @@
       state.favorites = [trackId].concat(state.favorites);
       toast("已加入我喜欢的");
     }
-    localStorage.setItem(STORAGE.favorites, JSON.stringify(state.favorites));
+    writeStored(STORAGE.favorites, JSON.stringify(state.favorites));
     renderLibrary();
   }
 
@@ -674,8 +690,8 @@
     state.favorites = state.favorites.filter((id) => id !== trackId);
     state.recent = state.recent.filter((id) => id !== trackId);
     state.queue = state.queue.filter((item) => item.id !== trackId);
-    localStorage.setItem(STORAGE.favorites, JSON.stringify(state.favorites));
-    localStorage.setItem(STORAGE.recent, JSON.stringify(state.recent));
+    writeStored(STORAGE.favorites, JSON.stringify(state.favorites));
+    writeStored(STORAGE.recent, JSON.stringify(state.recent));
     try {
       await deleteLocalRecord(trackId);
     } catch (error) {
@@ -739,13 +755,13 @@
 
     el.shuffleButton.addEventListener("click", () => {
       state.shuffle = !state.shuffle;
-      localStorage.setItem(STORAGE.shuffle, String(state.shuffle));
+      writeStored(STORAGE.shuffle, String(state.shuffle));
       updatePlayer();
       toast(state.shuffle ? "随机播放已开启" : "随机播放已关闭");
     });
     el.repeatButton.addEventListener("click", () => {
       state.repeat = state.repeat === "off" ? "all" : state.repeat === "all" ? "one" : "off";
-      localStorage.setItem(STORAGE.repeat, state.repeat);
+      writeStored(STORAGE.repeat, state.repeat);
       updatePlayer();
       toast(state.repeat === "off" ? "循环已关闭" : state.repeat === "all" ? "列表循环已开启" : "单曲循环已开启");
     });
@@ -761,7 +777,7 @@
     el.volume.addEventListener("input", () => {
       state.volume = Number(el.volume.value);
       el.audio.volume = state.volume;
-      localStorage.setItem(STORAGE.volume, String(state.volume));
+      writeStored(STORAGE.volume, String(state.volume));
     });
     $("#queue-toggle").addEventListener("click", () => {
       $(".queue-panel").scrollIntoView({ behavior: "smooth", block: "center" });
