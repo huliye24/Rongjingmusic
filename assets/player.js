@@ -95,7 +95,9 @@
   }
 
   function readVolume() {
-    const value = Number(readStored(STORAGE.volume));
+    const stored = readStored(STORAGE.volume);
+    if (stored === null) return 0.8;
+    const value = Number(stored);
     return Number.isFinite(value) && value >= 0 && value <= 1 ? value : 0.8;
   }
 
